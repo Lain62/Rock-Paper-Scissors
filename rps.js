@@ -9,10 +9,9 @@ function getPlayerChoice(chosen) {
         return 'paper';
 }   else {
         // put a loss statement here
-        return 'unknown choice';
+        return 'error on player choice';
 }
-
-}
+};
 
 function getComputerChoice() {
     let botChoice = Math.floor(Math.random() * 3);
@@ -24,10 +23,19 @@ function getComputerChoice() {
         case 2:
             return 'paper'; 
         case 3:
-            return "this is impossible tbh";
+            return "error on computer choice";
     }
 };
 
-let playerChoice = prompt("choose a fighter: rock, paper, scissor");
-console.log("you choose " + getPlayerChoice(playerChoice))
-console.log("bot chooses " + getComputerChoice())
+function playRound(playerSelection, computerSelection){
+    
+};
+
+let playerPrompt = prompt("choose a fighter: rock, paper, scissor");
+
+const playerSelection = getPlayerChoice(playerPrompt);
+const computerSelection = getComputerChoice();
+
+console.log(playRound(playerSelection))
+
+console.log(getComputerChoice())
