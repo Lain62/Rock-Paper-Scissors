@@ -28,10 +28,30 @@ function getComputerChoice() {
 };
 
 function playRound(playerSelection, computerSelection){
-    
+    if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        return 'win'
+    } 
+    else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        return 'win'
+    }
+    else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        return 'win'
+    }
+    else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+        return 'lose'
+    }
+    else if (playerSelection == 'rock' && computerSelection == 'paper') {
+        return 'lose'
+    }
+    else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+        return 'lose'}
+    else {
+        return 'draw'
+    }
+
 };
 
-let playerPrompt = prompt("choose a fighter: rock, paper, scissor");
+let playerPrompt = prompt("choose a fighter: rock, paper, scissors");
 
 const playerSelection = getPlayerChoice(playerPrompt);
 const computerSelection = getComputerChoice();
