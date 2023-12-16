@@ -64,9 +64,16 @@ function game() {
         const playerSelection = getPlayerChoice(playerPrompt);
         const computerSelection = getComputerChoice();
         console.log("You choose " + playerSelection + " bot choose " + computerSelection);
-        console.log(playRound(playerSelection, computerSelection));
+        console.log("you " + playRound(playerSelection, computerSelection));
         console.log("The score is you: " + playerScore + " bot is " + computerScore)
     }
+        if (playerScore > computerScore) {
+            console.log("You've won the game!")
+        } else if ( playerScore < computerScore) {
+            console.log("You've lost the game!")
+        } else {
+            console.log("it's a draw!")
+        }
 }
 
 console.log(game())
