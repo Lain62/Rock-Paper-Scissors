@@ -57,33 +57,52 @@ function playRound(playerSelection, computerSelection){
 	};
 };
 
-let roundsPlayed = 0; 
-let roundsMax = 5
+const roundResult = document.createElement('p')
+const result = document.createElement('p');
+const gameResult = document.createElement('p')
+const gameOver = document.createElement('p')
+
 function game(choice) {
 	roundsPlayed += 1
 	if (roundsPlayed <= roundsMax){
 	const playerSelection = getPlayerChoice(choice);
 	const computerSelection = getComputerChoice();
 	console.log("You choose " + playerSelection + " bot choose " + computerSelection);
+	roundResult.innerText ="You choose " + playerSelection + " and the bot choose " + computerSelection 
+	divResults.appendChild(roundResult)
 	console.log("you have " + playRound(playerSelection, computerSelection) + " this round!");
 	console.log("The score is you: " + playerScore + " bot is " + computerScore)
+	result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
+	divResults.appendChild(result)
 	}
 	if (roundsPlayed == roundsMax) {
 		if (playerScore > computerScore) {
+			gameResult.innerText =	"You've won the game!"
 			console.log("You've won the game!")
 		} else if ( playerScore < computerScore) {
+			gameResult.innerText = "You've lost the game!"
 			console.log("You've lost the game!")
 		} else {
+			gameResult.innerText = "You've drawn the game!"
 			console.log("You've drawn the game!")
 		}
+		divResults.appendChild(gameResult)
+			
 	}
-	if (roundsPlayed > roundsMax){
+	if (roundsPlayed >= roundsMax){
+		gameOver.innerText ="the game is over please refresh browser"
 		console.log("the game is over")
+		divResults.appendChild(gameOver)
 	}
 }
+
+let roundsPlayed = 0; 
+let roundsMax = 5
+
 const btnRock = document.querySelector('#rock')
 const btnPaper = document.querySelector('#paper')
 const btnScissors = document.querySelector('#scissors')
+const divResults = document.querySelector('.results')
 
 btnRock.addEventListener('click', () => {console.log(game("rock"))})
 btnPaper.addEventListener('click', () => {console.log(game("paper"))})
