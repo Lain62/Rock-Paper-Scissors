@@ -1,13 +1,13 @@
 let playerScore = 0
 let computerScore = 0
-let roundsPlayed = 0; 
-let roundsMax = 5
+let currentRound = 0; 
+let roundsMaxPlayed = 5
 
 const btnReset = document.createElement('button')
-const roundResult = document.createElement('p') // shows what is the result of the current round
-const roundResultCondition = document.createElement('h4') //shows if you win,drew,or lost the round
-const result = document.createElement('p'); // shows all the current score
-const gameResult = document.createElement('h2') // shows the result of all rounds
+const fightStart = document.createElement('p') // shows what is the result of the current round
+const fightEnd = document.createElement('h4') //shows if you win,drew,or lost the round
+const scores = document.createElement('p'); // shows all the current score
+const matchResult = document.createElement('h2') // shows the result of all rounds
 const gameOver = document.createElement('h3') // just shows the game is over
 
 const btnRock = document.querySelector('#rock')
@@ -16,7 +16,7 @@ const btnScissors = document.querySelector('#scissors')
 const divResults = document.querySelector('.results')
 const divHistory = document.querySelector('.history')
 
-function getPlayerChoice(chosen) {
+function playerChoice(chosen) {
 	if (chosen == "rock") {
 		return 'rock';
 	}   else if (chosen == "scissors") {
@@ -28,7 +28,7 @@ function getPlayerChoice(chosen) {
 	}
 };
 
-function getComputerChoice() {
+function computerChoice() {
 	let botChoice = Math.floor(Math.random() * 3);
 	switch (botChoice) {
 		case 0:
@@ -73,49 +73,50 @@ function playRound(player,computer){
 
 
 function game(choice) {
-	let paragameResult = ""
+	let paraGameResult = ""
 
-	roundsPlayed += 1
+	currentRound += 1
 
-	if (roundsPlayed <= roundsMax){
+	if (currentRound <= roundsMaxPlayed){
 
-		const player = getPlayerChoice(choice);
-		const computer = getComputerChoice();
-		let textRoundResult = "You choose " + player.toUpperCase() + " and the bot choose " + computer.toUpperCase()
-		let textRoundResultCondition = "You've " + playRound(player, computer)
+		const player = playerChoice(choice);
+		const computer = computerChoice();
+		let paraFightStart = "You choose " + player.toUpperCase() + " and the bot choose " + computer.toUpperCase()
+		let paraFightEnd = "You've " + playRound(player, computer)
+		let paraHistoryTracker = paraFightStart + " | " + playerScore + ":" + computerScore
 
-		const historyRounds = document.createElement('p') // shows history of all rounds result
+		const historyTracker = document.createElement('p') // shows history of all rounds result
 
-		roundResultCondition.innerText = textRoundResultCondition
-		roundResult.innerText = textRoundResult
-		result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
-		historyRounds.innerText = textRoundResult
+		fightStart.innerText = paraFightStart
+		fightEnd.innerText = paraFightEnd
+		scores.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
+		historyTracker.innerText = paraHistoryTracker
 
-		divHistory.appendChild(historyRounds)
-		divResults.appendChild(roundResult)
-		divResults.appendChild(roundResultCondition)
-		divResults.appendChild(result)
+		divHistory.appendChild(historyTracker)
+		divResults.appendChild(fightStart)
+		divResults.appendChild(fightEnd)
+		divResults.appendChild(scores)
 	}
 
-	if (roundsPlayed == roundsMax) {
+	if (currentRound == roundsMaxPlayed) {
 
 		if (playerScore > computerScore) {
-			paragameResult ="You've won the game!"
+			paraGameResult ="You've won the game!"
 		} else if ( playerScore < computerScore) {
-			paragameResult ="You've lost the game!"
+			paraGameResult ="You've lost the game!"
 		} else {
-			paragameResult ="You've drawn the game!"
+			paraGameResult ="You've drawn the game!"
 		}
 
-		const historyRounds = document.createElement('h5') // shows history of all rounds result
+		const historyEndTracker = document.createElement('h5') // shows history of all rounds result
 
-		gameResult.innerText = paragameResult
-		historyRounds.innerText = paragameResult
+		matchResult.innerText = paraGameResult
+		historyEndTracker.innerText = paraGameResult
 		gameOver.innerText ="the game is over!"
 		btnReset.innerText ="Reset"
 
-		divHistory.appendChild(historyRounds)
-		divResults.appendChild(gameResult)
+		divHistory.appendChild(historyEndTracker)
+		divResults.appendChild(matchResult)
 		divResults.appendChild(gameOver)
 		divResults.appendChild(btnReset)
 	}
@@ -126,11 +127,11 @@ function gameReset(){
 
 	playerScore = 0
 	computerScore = 0
-	roundsPlayed = 0
+	currentRound = 0
 
-	roundResult.remove()
-	gameResult.remove()
-	result.remove()
+	fightStart.remove()
+	matchResult.remove()
+	scores.remove()
 	gameOver.remove()
 	btnReset.remove()	
 
