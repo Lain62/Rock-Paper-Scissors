@@ -31,7 +31,7 @@ function computerChoice() {
 	}
 };
 
-function playRound(player,computer){
+function fight(player,computer){
 	if (player == 'rock' && computer == 'scissors') {
 		playerScore++;
 		return 'win'
@@ -69,7 +69,7 @@ function game(choice) {
 	if (currentRound <= roundsMaxPlayed){
 		const computer = computerChoice();
 		let paraFightStart = "You choose " + choice.toUpperCase() + " and the bot choose " + computer.toUpperCase()
-		let paraFightEnd = "You've " + playRound(choice, computer)
+		let paraFightEnd = "You've " + fight(choice, computer)
 		let paraHistoryTracker = paraFightStart + " | " + playerScore + ":" + computerScore
 
 		const historyTracker = document.createElement('p') // shows history of all rounds result
