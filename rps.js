@@ -26,6 +26,8 @@ function getComputerChoice() {
 	}
 };
 
+let playerScore = 0
+let computerScore = 0
 function playRound(playerSelection, computerSelection){
 	if (playerSelection == 'rock' && computerSelection == 'scissors') {
 		playerScore++;
@@ -61,23 +63,31 @@ function game(choice) {
 	if (roundsPlayed <= roundsMax){
 		const playerSelection = getPlayerChoice(choice);
 		const computerSelection = getComputerChoice();
-		let textRoundResult = "You choose " + playerSelection + " and the bot choose " + computerSelection
+		let textRoundResult = "You choose " + playerSelection.toUpperCase() + " and the bot choose " + computerSelection.toUpperCase()
+		let textRoundResultCondition = "You've " + playRound(playerSelection, computerSelection)
+		divResults.appendChild(roundResultCondition)
+		roundResultCondition.innerText = textRoundResultCondition
 		roundResult.innerText = textRoundResult
 		const historyRounds = document.createElement('p') // shows history of all rounds result
 		historyRounds.innerText = textRoundResult
-		divResults.appendChild(roundResult)
 		divHistory.appendChild(historyRounds)
+		divResults.appendChild(roundResult)
 		result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
 		divResults.appendChild(result)
 	}
+	let paragameResult = ""
 	if (roundsPlayed == roundsMax) {
 		if (playerScore > computerScore) {
-			gameResult.innerText =	"You've won the game!"
+			paragameResult =	"You've won the game!"
 		} else if ( playerScore < computerScore) {
-			gameResult.innerText = "You've lost the game!"
+			paragameResult = "You've lost the game!"
 		} else {
-			gameResult.innerText = "You've drawn the game!"
+			paragameResult = "You've drawn the game!"
 		}
+		const historyRounds = document.createElement('h5') // shows history of all rounds result
+		gameResult.innerText = paragameResult
+		historyRounds.innerText = paragameResult
+		divHistory.appendChild(historyRounds)
 		divResults.appendChild(gameResult)
 		gameOver.innerText ="the game is over!"
 		divResults.appendChild(gameOver)
@@ -95,19 +105,21 @@ function gameReset(){
 	result.remove()
 	gameOver.remove()
 	btnReset.remove()	
+	const historyRounds = document.createElement('h5') // shows history of all rounds result
+	historyRounds.innerText = "Game Reset!"
+	divHistory.appendChild(historyRounds)
 }
 
 
-let playerScore = 0
-let computerScore = 0
 let roundsPlayed = 0; 
 let roundsMax = 5
 
 const btnReset = document.createElement('button')
 const roundResult = document.createElement('p') // shows what is the result of the current round
+const roundResultCondition = document.createElement('h4') //shows if you win,drew,or lost the round
 const result = document.createElement('p'); // shows all the current score
-const gameResult = document.createElement('p') // shows the result of all rounds
-const gameOver = document.createElement('p') // just shows the game result
+const gameResult = document.createElement('h2') // shows the result of all rounds
+const gameOver = document.createElement('h3') // just shows the game is over
 
 const btnRock = document.querySelector('#rock')
 const btnPaper = document.querySelector('#paper')

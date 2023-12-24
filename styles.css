@@ -1,5 +1,22 @@
 body{
 	display: flex;
-	align-items: space-between;
+	flex-direction: column;
 	justify-content:space-evenly;
+	text-align: center;
+	max-width : 900px;
+	margin: 20px auto;
+}
+
+.container-top{
+	height : 300px;
+}
+
+.container-input{
+	display: flex;
+	justify-content:space-evenly
+}
+
+.input{
+	width:80px;
+	height:30px
 }
