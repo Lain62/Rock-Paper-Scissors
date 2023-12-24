@@ -1,18 +1,23 @@
-// 0 == rock, 1 == scissors, 2 == paper
-function getPlayerChoice(chosen) {
-	if (chosen == "rock") {
-		return 'rock';
-	}   else if (chosen == "scissors") {
-		return 'scissors';
-	}   else if (chosen == "paper") {
-		return 'paper';
-	}   else {
-		// put a loss statement here
-		return 'error on player choice';
-	}
-};
+// setup
+let playerScore = 0
+let computerScore = 0
+let currentRound = 0; 
+let roundsMaxPlayed = 5
 
-function getComputerChoice() {
+const btnReset = document.createElement('button') // The reset buttons that shows in game over
+const fightStart = document.createElement('p') // Shows what you and the bot picks for the current fight
+const fightEnd = document.createElement('h4') // Shows text if you win/lose/draw the current fight
+const scores = document.createElement('p'); // Shows the current scores of both players
+const matchResult = document.createElement('h2') // shows the game over result if you win/lose/draw
+const gameOver = document.createElement('h3') // Shows text Game over
+
+const btnRock = document.querySelector('#rock')
+const btnPaper = document.querySelector('#paper')
+const btnScissors = document.querySelector('#scissors')
+const divResults = document.querySelector('.results')
+const divHistory = document.querySelector('.history')
+
+function computerChoice() {
 	let botChoice = Math.floor(Math.random() * 3);
 	switch (botChoice) {
 		case 0:
@@ -26,108 +31,102 @@ function getComputerChoice() {
 	}
 };
 
-let playerScore = 0
-let computerScore = 0
-function playRound(playerSelection, computerSelection){
-	if (playerSelection == 'rock' && computerSelection == 'scissors') {
+function fight(player,computer){
+	if (player == 'rock' && computer == 'scissors') {
 		playerScore++;
 		return 'win'
-	} 
-	else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-		playerScore++;
-		return 'win'
-	}
-	else if (playerSelection == 'paper' && computerSelection == 'rock') {
-		playerScore++;
-		return 'win'
-	}
-	else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+	} 	
+	else if (player == 'rock' && computer == 'paper') {
 		computerScore++;
 		return 'lose'
 	}
-	else if (playerSelection == 'rock' && computerSelection == 'paper') {
-		computerScore++;
-		return 'lose'
+	else if (player == 'scissors' && computer == 'paper') {
+		playerScore++;
+		return 'win'
 	}
-	else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+	else if (player == 'scissors' && computer == 'rock') {
 		computerScore++;
-		return 'lose'}
+		return 'lose';
+	}
+	else if (player == 'paper' && computer == 'rock') {
+		playerScore++;
+		return 'win';
+	}
+	else if (player == 'paper' && computer == 'scissors') {
+		computerScore++;
+		return 'lose';
+	}
 	else {
 		return 'drew'
 	};
 };
 
-
 function game(choice) {
-	roundsPlayed += 1
-	if (roundsPlayed <= roundsMax){
-		const playerSelection = getPlayerChoice(choice);
-		const computerSelection = getComputerChoice();
-		let textRoundResult = "You choose " + playerSelection.toUpperCase() + " and the bot choose " + computerSelection.toUpperCase()
-		let textRoundResultCondition = "You've " + playRound(playerSelection, computerSelection)
-		roundResultCondition.innerText = textRoundResultCondition
-		roundResult.innerText = textRoundResult
-		const historyRounds = document.createElement('p') // shows history of all rounds result
-		historyRounds.innerText = textRoundResult
-		divHistory.appendChild(historyRounds)
-		divResults.appendChild(roundResult)
-		divResults.appendChild(roundResultCondition)
-		result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
-		divResults.appendChild(result)
+	let paraGameResult = ""
+
+	currentRound += 1
+
+	if (currentRound <= roundsMaxPlayed){
+		const computer = computerChoice();
+		let paraFightStart = `You choose ${choice.toUpperCase()} and the bot choose ${computer.toUpperCase()}`
+		let paraFightEnd = `You've ${fight(choice, computer)}`
+		let paraHistoryTracker = `${paraFightStart} | ${playerScore} : ${computerScore}`
+
+		const historyTracker = document.createElement('p') // shows history of all rounds result
+
+		fightStart.innerText = paraFightStart
+		fightEnd.innerText = paraFightEnd
+		scores.innerText = `The score is you: ${playerScore} bot is: ${computerScore}` 
+		historyTracker.innerText = paraHistoryTracker
+
+		divHistory.appendChild(historyTracker)
+		divResults.appendChild(fightStart)
+		divResults.appendChild(fightEnd)
+		divResults.appendChild(scores)
 	}
-	let paragameResult = ""
-	if (roundsPlayed == roundsMax) {
+
+	if (currentRound == roundsMaxPlayed) {
 		if (playerScore > computerScore) {
-			paragameResult =	"You've won the game!"
+			paraGameResult ="You've won the game!"
 		} else if ( playerScore < computerScore) {
-			paragameResult = "You've lost the game!"
+			paraGameResult ="You've lost the game!"
 		} else {
-			paragameResult = "You've drawn the game!"
+			paraGameResult ="You've drawn the game!"
 		}
-		const historyRounds = document.createElement('h5') // shows history of all rounds result
-		gameResult.innerText = paragameResult
-		historyRounds.innerText = paragameResult
-		divHistory.appendChild(historyRounds)
-		divResults.appendChild(gameResult)
+
+		const historyEndTracker = document.createElement('h5') // shows history of all rounds result
+
+		matchResult.innerText = paraGameResult
+		historyEndTracker.innerText = paraGameResult
 		gameOver.innerText ="the game is over!"
-		divResults.appendChild(gameOver)
 		btnReset.innerText ="Reset"
+
+		divHistory.appendChild(historyEndTracker)
+		divResults.appendChild(matchResult)
+		divResults.appendChild(gameOver)
 		divResults.appendChild(btnReset)
 	}
 }
 
 function gameReset(){
+	const historyRounds = document.createElement('h5') // shows history of all gameover result
+
 	playerScore = 0
 	computerScore = 0
-	roundsPlayed = 0
-	roundResult.remove()
-	gameResult.remove()
-	result.remove()
+	currentRound = 0
+
+	fightStart.remove()
+	matchResult.remove()
+	scores.remove()
 	gameOver.remove()
 	btnReset.remove()	
-	const historyRounds = document.createElement('h5') // shows history of all rounds result
+
 	historyRounds.innerText = "Game Reset!"
+
 	divHistory.appendChild(historyRounds)
 }
 
-
-let roundsPlayed = 0; 
-let roundsMax = 5
-
-const btnReset = document.createElement('button')
-const roundResult = document.createElement('p') // shows what is the result of the current round
-const roundResultCondition = document.createElement('h4') //shows if you win,drew,or lost the round
-const result = document.createElement('p'); // shows all the current score
-const gameResult = document.createElement('h2') // shows the result of all rounds
-const gameOver = document.createElement('h3') // just shows the game is over
-
-const btnRock = document.querySelector('#rock')
-const btnPaper = document.querySelector('#paper')
-const btnScissors = document.querySelector('#scissors')
-const divResults = document.querySelector('.results')
-const divHistory = document.querySelector('.history')
-
-btnRock.addEventListener('click', () => {console.log(game("rock"))})
-btnPaper.addEventListener('click', () => {console.log(game("paper"))})
-btnScissors.addEventListener('click', () => {console.log(game("scissors"))})
+btnRock.addEventListener('click', () => {game("rock")})
+btnPaper.addEventListener('click', () => {game("paper")})
+btnScissors.addEventListener('click', () => {game("scissors")})
 btnReset.addEventListener('click', () => {gameReset()})
