@@ -8,7 +8,12 @@ body{
 }
 
 .container-top{
-	height : 300px;
+	height : 400px;
+	margin-top: 20px
+}
+
+.title, .title-head{
+	margin:0px
 }
 
 .container-input{
@@ -17,6 +22,28 @@ body{
 }
 
 .input{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
 	width:80px;
-	height:30px
+	justify-content: space-evenly;
+	height:100px;
+	border-style: solid;
+	border-width:2px;
+	border-color:black;
+	background-color:whitesmoke;
+	border-radius:5px;
+
+}
+
+.input-img{
+	width:60px;
+	height:60px;
+	border-radius:5px;
+	border-style:solid;
+
+}
+
+.input-para{
+	margin: 0px
 }

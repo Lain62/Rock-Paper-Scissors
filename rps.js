@@ -65,13 +65,13 @@ function game(choice) {
 		const computerSelection = getComputerChoice();
 		let textRoundResult = "You choose " + playerSelection.toUpperCase() + " and the bot choose " + computerSelection.toUpperCase()
 		let textRoundResultCondition = "You've " + playRound(playerSelection, computerSelection)
-		divResults.appendChild(roundResultCondition)
 		roundResultCondition.innerText = textRoundResultCondition
 		roundResult.innerText = textRoundResult
 		const historyRounds = document.createElement('p') // shows history of all rounds result
 		historyRounds.innerText = textRoundResult
 		divHistory.appendChild(historyRounds)
 		divResults.appendChild(roundResult)
+		divResults.appendChild(roundResultCondition)
 		result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
 		divResults.appendChild(result)
 	}
