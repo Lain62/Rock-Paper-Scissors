@@ -1,0 +1,5 @@
+body{
+	display: flex;
+	align-items: space-between;
+	justify-content:space-evenly;
+}

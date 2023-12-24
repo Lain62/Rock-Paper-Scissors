@@ -1,6 +1,4 @@
 // 0 == rock, 1 == scissors, 2 == paper
-let playerScore = 0
-let computerScore = 0
 function getPlayerChoice(chosen) {
 	if (chosen == "rock") {
 		return 'rock';
@@ -57,54 +55,67 @@ function playRound(playerSelection, computerSelection){
 	};
 };
 
-const roundResult = document.createElement('p')
-const result = document.createElement('p');
-const gameResult = document.createElement('p')
-const gameOver = document.createElement('p')
 
 function game(choice) {
 	roundsPlayed += 1
 	if (roundsPlayed <= roundsMax){
-	const playerSelection = getPlayerChoice(choice);
-	const computerSelection = getComputerChoice();
-	console.log("You choose " + playerSelection + " bot choose " + computerSelection);
-	roundResult.innerText ="You choose " + playerSelection + " and the bot choose " + computerSelection 
-	divResults.appendChild(roundResult)
-	console.log("you have " + playRound(playerSelection, computerSelection) + " this round!");
-	console.log("The score is you: " + playerScore + " bot is " + computerScore)
-	result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
-	divResults.appendChild(result)
+		const playerSelection = getPlayerChoice(choice);
+		const computerSelection = getComputerChoice();
+		let textRoundResult = "You choose " + playerSelection + " and the bot choose " + computerSelection
+		roundResult.innerText = textRoundResult
+		const historyRounds = document.createElement('p') // shows history of all rounds result
+		historyRounds.innerText = textRoundResult
+		divResults.appendChild(roundResult)
+		divHistory.appendChild(historyRounds)
+		result.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
+		divResults.appendChild(result)
 	}
 	if (roundsPlayed == roundsMax) {
 		if (playerScore > computerScore) {
 			gameResult.innerText =	"You've won the game!"
-			console.log("You've won the game!")
 		} else if ( playerScore < computerScore) {
 			gameResult.innerText = "You've lost the game!"
-			console.log("You've lost the game!")
 		} else {
 			gameResult.innerText = "You've drawn the game!"
-			console.log("You've drawn the game!")
 		}
 		divResults.appendChild(gameResult)
-			
-	}
-	if (roundsPlayed >= roundsMax){
-		gameOver.innerText ="the game is over please refresh browser"
-		console.log("the game is over")
+		gameOver.innerText ="the game is over!"
 		divResults.appendChild(gameOver)
+		btnReset.innerText ="Reset"
+		divResults.appendChild(btnReset)
 	}
 }
 
+function gameReset(){
+	playerScore = 0
+	computerScore = 0
+	roundsPlayed = 0
+	roundResult.remove()
+	gameResult.remove()
+	result.remove()
+	gameOver.remove()
+	btnReset.remove()	
+}
+
+
+let playerScore = 0
+let computerScore = 0
 let roundsPlayed = 0; 
 let roundsMax = 5
+
+const btnReset = document.createElement('button')
+const roundResult = document.createElement('p') // shows what is the result of the current round
+const result = document.createElement('p'); // shows all the current score
+const gameResult = document.createElement('p') // shows the result of all rounds
+const gameOver = document.createElement('p') // just shows the game result
 
 const btnRock = document.querySelector('#rock')
 const btnPaper = document.querySelector('#paper')
 const btnScissors = document.querySelector('#scissors')
 const divResults = document.querySelector('.results')
+const divHistory = document.querySelector('.history')
 
 btnRock.addEventListener('click', () => {console.log(game("rock"))})
 btnPaper.addEventListener('click', () => {console.log(game("paper"))})
 btnScissors.addEventListener('click', () => {console.log(game("scissors"))})
-
+btnReset.addEventListener('click', () => {gameReset()})
