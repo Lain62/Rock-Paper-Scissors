@@ -140,7 +140,7 @@ function gameReset(){
 	divHistory.appendChild(historyRounds)
 }
 
-btnRock.addEventListener('click', () => {console.log(game("rock"))})
-btnPaper.addEventListener('click', () => {console.log(game("paper"))})
-btnScissors.addEventListener('click', () => {console.log(game("scissors"))})
+btnRock.addEventListener('click', () => {game("rock")})
+btnPaper.addEventListener('click', () => {game("paper")})
+btnScissors.addEventListener('click', () => {game("scissors")})
 btnReset.addEventListener('click', () => {gameReset()})
