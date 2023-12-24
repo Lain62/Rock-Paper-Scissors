@@ -66,11 +66,9 @@ function game(choice) {
 	currentRound += 1
 
 	if (currentRound <= roundsMaxPlayed){
-
-		const player = choice;
 		const computer = computerChoice();
-		let paraFightStart = "You choose " + player.toUpperCase() + " and the bot choose " + computer.toUpperCase()
-		let paraFightEnd = "You've " + playRound(player, computer)
+		let paraFightStart = "You choose " + choice.toUpperCase() + " and the bot choose " + computer.toUpperCase()
+		let paraFightEnd = "You've " + playRound(choice, computer)
 		let paraHistoryTracker = paraFightStart + " | " + playerScore + ":" + computerScore
 
 		const historyTracker = document.createElement('p') // shows history of all rounds result
@@ -87,7 +85,6 @@ function game(choice) {
 	}
 
 	if (currentRound == roundsMaxPlayed) {
-
 		if (playerScore > computerScore) {
 			paraGameResult ="You've won the game!"
 		} else if ( playerScore < computerScore) {
@@ -111,7 +108,7 @@ function game(choice) {
 }
 
 function gameReset(){
-	const historyRounds = document.createElement('h5') // shows history of all rounds result
+	const historyRounds = document.createElement('h5') // shows history of all gameover result
 
 	playerScore = 0
 	computerScore = 0
