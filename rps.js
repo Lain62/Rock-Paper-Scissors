@@ -17,18 +17,6 @@ const btnScissors = document.querySelector('#scissors')
 const divResults = document.querySelector('.results')
 const divHistory = document.querySelector('.history')
 
-function playerChoice(chosen) {
-	if (chosen == "rock") {
-		return 'rock';
-	}   else if (chosen == "scissors") {
-		return 'scissors';
-	}   else if (chosen == "paper") {
-		return 'paper';
-	}   else {
-		return 'error on player choice';
-	}
-};
-
 function computerChoice() {
 	let botChoice = Math.floor(Math.random() * 3);
 	switch (botChoice) {
@@ -72,7 +60,6 @@ function playRound(player,computer){
 	};
 };
 
-
 function game(choice) {
 	let paraGameResult = ""
 
@@ -80,7 +67,7 @@ function game(choice) {
 
 	if (currentRound <= roundsMaxPlayed){
 
-		const player = playerChoice(choice);
+		const player = choice;
 		const computer = computerChoice();
 		let paraFightStart = "You choose " + player.toUpperCase() + " and the bot choose " + computer.toUpperCase()
 		let paraFightEnd = "You've " + playRound(player, computer)
