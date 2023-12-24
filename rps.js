@@ -1,14 +1,15 @@
+// setup
 let playerScore = 0
 let computerScore = 0
 let currentRound = 0; 
 let roundsMaxPlayed = 5
 
-const btnReset = document.createElement('button')
-const fightStart = document.createElement('p') // shows what is the result of the current round
-const fightEnd = document.createElement('h4') //shows if you win,drew,or lost the round
-const scores = document.createElement('p'); // shows all the current score
-const matchResult = document.createElement('h2') // shows the result of all rounds
-const gameOver = document.createElement('h3') // just shows the game is over
+const btnReset = document.createElement('button') // The reset buttons that shows in game over
+const fightStart = document.createElement('p') // Shows what you and the bot picks for the current fight
+const fightEnd = document.createElement('h4') // Shows text if you win/lose/draw the current fight
+const scores = document.createElement('p'); // Shows the current scores of both players
+const matchResult = document.createElement('h2') // shows the game over result if you win/lose/draw
+const gameOver = document.createElement('h3') // Shows text Game over
 
 const btnRock = document.querySelector('#rock')
 const btnPaper = document.querySelector('#paper')
