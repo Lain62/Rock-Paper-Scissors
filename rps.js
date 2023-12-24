@@ -35,26 +35,27 @@ function playRound(player,computer){
 	if (player == 'rock' && computer == 'scissors') {
 		playerScore++;
 		return 'win'
-	} 
-	else if (player == 'scissors' && computer == 'paper') {
-		playerScore++;
-		return 'win'
-	}
-	else if (player == 'paper' && computer == 'rock') {
-		playerScore++;
-		return 'win'
-	}
-	else if (player == 'paper' && computer == 'scissors') {
-		computerScore++;
-		return 'lose'
-	}
+	} 	
 	else if (player == 'rock' && computer == 'paper') {
 		computerScore++;
 		return 'lose'
 	}
+	else if (player == 'scissors' && computer == 'paper') {
+		playerScore++;
+		return 'win'
+	}
 	else if (player == 'scissors' && computer == 'rock') {
 		computerScore++;
-		return 'lose'}
+		return 'lose';
+	}
+	else if (player == 'paper' && computer == 'rock') {
+		playerScore++;
+		return 'win';
+	}
+	else if (player == 'paper' && computer == 'scissors') {
+		computerScore++;
+		return 'lose';
+	}
 	else {
 		return 'drew'
 	};
