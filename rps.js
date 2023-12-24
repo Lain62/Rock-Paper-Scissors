@@ -68,15 +68,15 @@ function game(choice) {
 
 	if (currentRound <= roundsMaxPlayed){
 		const computer = computerChoice();
-		let paraFightStart = "You choose " + choice.toUpperCase() + " and the bot choose " + computer.toUpperCase()
-		let paraFightEnd = "You've " + fight(choice, computer)
-		let paraHistoryTracker = paraFightStart + " | " + playerScore + ":" + computerScore
+		let paraFightStart = `You choose ${choice.toUpperCase()} and the bot choose ${computer.toUpperCase()}`
+		let paraFightEnd = `You've ${fight(choice, computer)}`
+		let paraHistoryTracker = `${paraFightStart} | ${playerScore} : ${computerScore}`
 
 		const historyTracker = document.createElement('p') // shows history of all rounds result
 
 		fightStart.innerText = paraFightStart
 		fightEnd.innerText = paraFightEnd
-		scores.innerText = "The score is you: " + playerScore + " bot is " + computerScore; 
+		scores.innerText = `The score is you: ${playerScore} bot is: ${computerScore}` 
 		historyTracker.innerText = paraHistoryTracker
 
 		divHistory.appendChild(historyTracker)
